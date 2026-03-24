@@ -19,9 +19,25 @@ document.addEventListener('DOMContentLoaded', () => {
   setupEventListeners();
   createNewSession();
   loadCourseStats();
+  initThemeToggle();
 
   document.getElementById('newChatBtn').addEventListener('click', createNewSession);
 });
+
+// Theme Toggle
+function initThemeToggle() {
+    const toggle = document.getElementById('themeToggle');
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) {
+        document.documentElement.setAttribute('data-theme', savedTheme);
+    }
+    toggle.addEventListener('click', () => {
+        const current = document.documentElement.getAttribute('data-theme');
+        const next = current === 'light' ? 'dark' : 'light';
+        document.documentElement.setAttribute('data-theme', next);
+        localStorage.setItem('theme', next);
+    });
+}
 
 // Event Listeners
 function setupEventListeners() {
